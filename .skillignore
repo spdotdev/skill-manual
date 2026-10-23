@@ -1,0 +1,14 @@
+# Files that are not part of the runtime skill. Host install-time scanners and registries use this list to keep
+# development files out of the bundle and out of the security scan.
+.git/
+.github/
+.venv/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+tests/
+docs/
+examples/
+dist/
+node_modules/

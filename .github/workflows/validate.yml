@@ -1,0 +1,24 @@
+name: Validate
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions: {}
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run the tests
+        run: |
+          if [ -f tests/conftest.py ] || grep -rqE "^(import|from) pytest" tests; then
+            python3 -m pip install --quiet pytest
+            python3 -m pytest -q tests
+          else
+            python3 -m unittest discover -s tests -v
+          fi
